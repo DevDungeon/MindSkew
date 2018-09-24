@@ -21,22 +21,26 @@ public class RandomGeneratorManager extends Thread {
     int randomNumber;
     int totals[] = new int[10];
     Random randGenerator = new Random();
-    int numGenerations = 1000000000;
     private boolean paused = false;
     private boolean started = false;
+    private MainWindow mainWindow;
     
-    public RandomGeneratorManager() {
-        
+    public RandomGeneratorManager(MainWindow mw) {
+        mainWindow = mw;
     }
     
     public void run() {
         System.out.println("Starting random number generator thread.");
-        System.out.println("Generating " + numGenerations + " random numbers. Focus on a single number 0-9.");
-                for (int k = 0; k < numGenerations; k++) {
+        System.out.println("Generating random numbers. Focus on a single number 0-9.");
+        while (true) {
             randomNumber = randGenerator.nextInt(10) + 0;
             totals[randomNumber]++;
+            if (totals[randomNumber] >= 1000000) {
+                totals[randomNumber] = 0;
+                mainWindow.incrementProgressBar(randomNumber);
+            }
         }
-        System.out.println("Finished generating random numbers.");
+        
     }
     
     public void togglePause() {
@@ -65,11 +69,4 @@ public class RandomGeneratorManager extends Thread {
         paused = false;
     }
     
-    public static void main(String[] args) {
-        RandomGeneratorManager rg = new RandomGeneratorManager();
-        rg.start();
-           
-        
-    }
-
 }
