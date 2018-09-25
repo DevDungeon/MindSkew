@@ -27,9 +27,9 @@ Changelog
 ---------
 v1.0 - 2018/9/24 - Initial stable release.
 
-
 To do
 -----
 * Provide better feedback and instructions to the user
 * Tweak how long it runs
 * Create other modes: heads/tails, image decoding, orderliness measurement
+* Allow people to upload their results to get statistics on a larger scale
